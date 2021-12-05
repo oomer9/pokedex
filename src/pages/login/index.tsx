@@ -1,12 +1,15 @@
-import { TextField } from "@material-ui/core";
+import { TextField, useMediaQuery, useTheme } from "@material-ui/core";
 import { CatchingPokemon } from "@mui/icons-material";
 import { Button, Card } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import { globalVariables } from "../../styles/globalVariables";
 import { useStyles } from "./styles";
 
 export default function Login() {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <div>
       <div
@@ -16,16 +19,18 @@ export default function Login() {
           width: "100%",
         }}
       >
-        <div className={classes.leftBg}>
-          <CatchingPokemon
-            style={{
-              color: globalVariables.blue,
-              height: "62px",
-              width: "62px",
-            }}
-          />
-          <div className={classes.loginHeader}>Pok&#233;dex</div>
-        </div>
+        {isMobile ? (
+          <div className={classes.leftBg}>
+            <CatchingPokemon
+              style={{
+                color: globalVariables.blue,
+                height: "62px",
+                width: "62px",
+              }}
+            />
+            <div className={classes.loginHeader}>Pok&#233;dex</div>
+          </div>
+        ) : null}
         <div
           style={{
             display: "flex",
@@ -68,12 +73,17 @@ export default function Login() {
                 variant="outlined"
                 label="Password"
               />
-              <Button
-                style={{ backgroundColor: globalVariables.blue, width: "100%" }}
-                variant="contained"
-              >
-                Login
-              </Button>
+              <Link style={{ textDecoration: "none" }} to="/">
+                <Button
+                  style={{
+                    backgroundColor: globalVariables.blue,
+                    width: "100%",
+                  }}
+                  variant="contained"
+                >
+                  Login
+                </Button>
+              </Link>
             </div>
           </Card>
         </div>
