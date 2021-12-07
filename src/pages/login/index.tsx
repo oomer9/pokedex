@@ -1,7 +1,17 @@
-import { TextField, useMediaQuery, useTheme } from "@material-ui/core";
-import { CatchingPokemon } from "@mui/icons-material";
-import { Button, Card } from "@mui/material";
 import React from "react";
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
+import {
+  CatchingPokemon,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import { Button, Card } from "@mui/material";
 import { Link } from "react-router-dom";
 import { globalVariables } from "../../styles/globalVariables";
 import { useStyles } from "./styles";
@@ -10,6 +20,10 @@ export default function Login() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
   return (
     <div>
       <div
@@ -62,16 +76,32 @@ export default function Login() {
                 Log in
               </div>
               <TextField
-                style={{ marginBottom: "10px" }}
+                style={{ marginBottom: "10px", width: "100%" }}
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 variant="outlined"
                 label="Email"
               />
               <TextField
-                style={{ marginBottom: "20px" }}
+                style={{ marginBottom: "20px", width: "100%" }}
                 name="password"
                 variant="outlined"
                 label="Password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Link style={{ textDecoration: "none" }} to="/">
                 <Button
