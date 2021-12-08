@@ -12,14 +12,18 @@ export function PokemonCard(props: Props) {
   const classes = useStyles();
 
   return (
-    <div style={{ width: "50%" }}>
+    <div style={{ width: "100%", padding: "10px" }}>
       <Card variant="elevation">
         <CardMedia
           component="img"
           image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
           alt={name}
         />
-        <CardContent>{name}</CardContent>
+        <CardContent
+          style={{ textAlign: "center", textTransform: "capitalize" }}
+        >
+          {name}
+        </CardContent>
       </Card>
     </div>
   );

@@ -7,13 +7,15 @@ import { useStyles } from "./styles";
 export function Home() {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [pokemonList, setPokemonList] = React.useState<PokemonListItem[]>([]);
+  const [pageSize, setPageSize] = React.useState<number>(18);
+  const [page, setpage] = React.useState<number>(1);
   React.useEffect(() => {
     getPokemonList();
   }, []);
   const getPokemonList = async () => {
-    const pokemon = await getPokemon(0, 20);
+    const pokemon = await getPokemon(page, pageSize);
     if (pokemon?.data?.results?.length) {
       setPokemonList(pokemon.data.results);
     }
@@ -36,7 +38,7 @@ export function Home() {
               key={index}
               style={{
                 display: "flex",
-                width: "33%",
+                width: isMobile ? "33%" : "15%",
                 justifyContent: "center",
               }}
             >
