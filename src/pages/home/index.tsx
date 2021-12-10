@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import React from "react";
+import { ListNavBar } from "../../components/listNavBar";
 import { PokemonCard } from "../../components/pokemonCard";
 import { getPokemon, PokemonListItem } from "../../pokeServices";
 import { useStyles } from "./styles";
@@ -23,6 +24,15 @@ export function Home() {
   return (
     <div>
       <div className={classes.pageHeader}>Pok&#233;dex</div>
+      <div>
+        <ListNavBar
+          pageSize={pageSize}
+          setPageNumber={setPageSize}
+          page={page}
+          setPageSize={setPageSize}
+          totalPages={100}
+        />
+      </div>
       <div
         style={{
           display: "flex",
