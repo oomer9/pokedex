@@ -21,8 +21,12 @@ export function ListNavBar(props: Props) {
       <Button>
         <ArrowCircleLeftIcon style={{ color: globalVariables.blue }} />
       </Button>
-      <div>test</div>
-      <Button>
+      <div style={{ fontWeight: "bold", fontSize: "24px" }}>{page}/{totalPages}</div>
+      <Button
+        onClick={() => {
+          setPageNumber(page + 1);
+        }}
+      >
         <ArrowCircleRightIcon style={{ color: globalVariables.blue }} />
       </Button>
     </div>

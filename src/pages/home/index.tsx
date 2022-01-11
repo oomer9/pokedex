@@ -1,8 +1,11 @@
 import { useMediaQuery, useTheme } from "@material-ui/core";
+import { CatchingPokemon } from "@mui/icons-material";
+import { color } from "@mui/system";
 import React from "react";
 import { ListNavBar } from "../../components/listNavBar";
 import { PokemonCard } from "../../components/pokemonCard";
 import { getPokemon, PokemonListItem } from "../../pokeServices";
+import { globalVariables } from "../../styles/globalVariables";
 import { useStyles } from "./styles";
 
 export function Home() {
@@ -12,25 +15,44 @@ export function Home() {
   const [pokemonList, setPokemonList] = React.useState<PokemonListItem[]>([]);
   const [pageSize, setPageSize] = React.useState<number>(18);
   const [page, setpage] = React.useState<number>(1);
+  const [totalCount, setTotalCount] = React.useState<number>(1);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   React.useEffect(() => {
     getPokemonList();
-  }, []);
+  }, [page]);
   const getPokemonList = async () => {
-    const pokemon = await getPokemon(page, pageSize);
-    if (pokemon?.data?.results?.length) {
-      setPokemonList(pokemon.data.results);
+    setIsLoading(true);
+    try {
+      const pokemon = await getPokemon(page, pageSize);
+      if (pokemon?.data?.results?.length) {
+        setPokemonList(pokemon.data.results);
+        setTotalCount(pokemon.data.count);
+      }
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
     }
   };
   return (
     <div>
-      <div className={classes.pageHeader}>Pok&#233;dex</div>
+      <div className={classes.pageHeader}>
+        Pok&#233;dex{" "}
+        <CatchingPokemon
+          style={{
+            color: globalVariables.red,
+            height: "62px",
+            width: "62px",
+          }}
+        />
+      </div>
       <div>
         <ListNavBar
           pageSize={pageSize}
-          setPageNumber={setPageSize}
+          setPageNumber={setpage}
           page={page}
           setPageSize={setPageSize}
-          totalPages={100}
+          totalPages={Math.round(totalCount / pageSize)}
         />
       </div>
       <div
