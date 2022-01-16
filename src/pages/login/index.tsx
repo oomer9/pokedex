@@ -37,7 +37,7 @@ export default function Login() {
           <div className={classes.leftBg}>
             <CatchingPokemon
               style={{
-                color: globalVariables.blue,
+                color: globalVariables.red,
                 height: "62px",
                 width: "62px",
               }}
