@@ -3,6 +3,7 @@ import { CatchingPokemon } from "@mui/icons-material";
 import { color } from "@mui/system";
 import React from "react";
 import { ListNavBar } from "../../components/listNavBar";
+import { LoadingIndicator } from "../../components/loadingIndicator";
 import { PokemonCard } from "../../components/pokemonCard";
 import { getPokemon, PokemonListItem } from "../../pokeServices";
 import { globalVariables } from "../../styles/globalVariables";
@@ -63,21 +64,30 @@ export function Home() {
           justifyContent: "space-around",
         }}
       >
-        {pokemonList.map((pokemon: PokemonListItem, index: number) => {
-          const pokemonUrlSplit = pokemon.url.split("/");
-          return (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                width: isMobile ? "33%" : "15%",
-                justifyContent: "center",
-              }}
-            >
-              <PokemonCard name={pokemon.name} pokemonId={pokemonUrlSplit[6]} />
-            </div>
-          );
-        })}
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <>
+            {pokemonList.map((pokemon: PokemonListItem, index: number) => {
+              const pokemonUrlSplit = pokemon.url.split("/");
+              return (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    width: isMobile ? "33%" : "15%",
+                    justifyContent: "center",
+                  }}
+                >
+                  <PokemonCard
+                    name={pokemon.name}
+                    pokemonId={pokemonUrlSplit[6]}
+                  />
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
