@@ -65,7 +65,7 @@ export function Home() {
         }}
       >
         {isLoading ? (
-          <LoadingIndicator />
+          <LoadingIndicator loadingMessage="Loading Pokemon..." />
         ) : (
           <>
             {pokemonList.map((pokemon: PokemonListItem, index: number) => {

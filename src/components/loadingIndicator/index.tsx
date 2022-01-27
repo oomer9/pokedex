@@ -4,12 +4,10 @@ import { globalVariables } from "../../styles/globalVariables";
 import { useStyles } from "./styles";
 
 type Props = {
-  loadingMessage?: string;
+  loadingMessage: string;
 };
 
-export function LoadingIndicator(
-  props: Props = { loadingMessage: "loading..." }
-) {
+export function LoadingIndicator(props: Props) {
   const classes = useStyles();
   const { loadingMessage } = props;
   return (
@@ -18,7 +16,7 @@ export function LoadingIndicator(
         style={{ height: "100px", width: "100px", color: globalVariables.red }}
         className={classes.bounceAndSpin}
       />
-      <div>{props.loadingMessage}</div>
+      <div style={{ fontWeight: "bold" }}>{loadingMessage}</div>
     </div>
   );
 }
