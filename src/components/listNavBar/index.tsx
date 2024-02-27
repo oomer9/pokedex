@@ -18,16 +18,26 @@ export function ListNavBar(props: Props) {
 
   return (
     <div className={classes.navBar}>
-      <Button>
-        <ArrowCircleLeftIcon style={{ color: globalVariables.blue }} />
+      <Button
+        onClick={() => {
+          if (page > 1) {
+            setPageNumber(page - 1);
+          } else {
+            setPageNumber(1);
+          }
+        }}
+      >
+        <ArrowCircleLeftIcon style={{ color: globalVariables.black }} />
       </Button>
-      <div style={{ fontWeight: "bold", fontSize: "24px" }}>{page}/{totalPages}</div>
+      <div style={{ fontWeight: "bold", fontSize: "24px" }}>
+        {page}/{totalPages}
+      </div>
       <Button
         onClick={() => {
           setPageNumber(page + 1);
         }}
       >
-        <ArrowCircleRightIcon style={{ color: globalVariables.blue }} />
+        <ArrowCircleRightIcon style={{ color: globalVariables.black }} />
       </Button>
     </div>
   );
