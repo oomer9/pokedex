@@ -22,7 +22,7 @@ export function PokemonCard(props: Props) {
     <div style={{ width: "100%", padding: "10px" }}>
       <Card className={classes.pokeCard} variant="elevation">
         <CardMedia
-          style={{ height: isMobile ? "100px" : "150px" }}
+          style={{ height: isMobile ? "100px" : "250px", objectFit: "contain" }}
           component="img"
           image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
           alt={name}
