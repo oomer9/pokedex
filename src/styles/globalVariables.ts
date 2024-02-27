@@ -4,4 +4,5 @@ export const globalVariables = {
   blue: "#3B4CCA",
   yellow: "#FFDE00",
   darkYellow: "#B3A125",
+  black: "#000000",
 };
