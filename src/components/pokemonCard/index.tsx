@@ -5,7 +5,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useStyles } from "./styles";
 
 type Props = {
@@ -18,14 +18,25 @@ export function PokemonCard(props: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const normalPokemon = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+  const shinyPokemon = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonId}.png`;
+
+  const [hover, setHover] = useState(false);
+
   return (
     <div style={{ width: "100%", padding: "10px" }}>
       <Card className={classes.pokeCard} variant="elevation">
         <CardMedia
-          style={{ height: isMobile ? "100px" : "250px", objectFit: "contain" }}
+          style={{
+            height: isMobile ? "100px" : "250px",
+            objectFit: "contain",
+            cursor: "pointer",
+          }}
           component="img"
-          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
-          alt={name}
+          src={hover ? shinyPokemon : normalPokemon}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
         />
         <CardContent
           style={{ textAlign: "center", textTransform: "capitalize" }}
