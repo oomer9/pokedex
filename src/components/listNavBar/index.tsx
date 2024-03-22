@@ -8,7 +8,7 @@ type Props = {
   totalPages: number;
   setPageNumber: Dispatch<SetStateAction<number>>;
   setPageSize: Dispatch<SetStateAction<number>>;
-  pageSize: number; // Add pageSize to the Props type
+  pageSize: number;
 };
 
 export function ListNavBar(props: Props) {
