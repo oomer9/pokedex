@@ -12,7 +12,7 @@ type Props = {
 };
 
 export function ListNavBar(props: Props) {
-  const { page, totalPages, setPageNumber } = props;
+  const { page, totalPages, setPageNumber, setPageSize, pageSize } = props;
   const classes = useStyles();
 
   return (
