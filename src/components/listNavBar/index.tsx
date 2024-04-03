@@ -1,44 +1,31 @@
-import React from "react";
 import { useStyles } from "./styles";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import { Button } from "@material-ui/core";
+import { Pagination } from "@mui/material";
 import { globalVariables } from "../../styles/globalVariables";
+import React, { Dispatch, SetStateAction } from "react";
+
 type Props = {
   page: number;
   totalPages: number;
-  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-  setPageSize: React.Dispatch<React.SetStateAction<number>>;
-  pageSize: number;
+  setPageNumber: Dispatch<SetStateAction<number>>;
 };
 
 export function ListNavBar(props: Props) {
-  const { page, totalPages, setPageNumber, setPageSize, pageSize } = props;
+  const { page, totalPages, setPageNumber } = props;
   const classes = useStyles();
 
   return (
-    <div className={classes.navBar}>
-      <Button
-        onClick={() => {
-          if (page > 1) {
-            setPageNumber(page - 1);
-          } else {
-            setPageNumber(1);
-          }
-        }}
-      >
-        <ArrowCircleLeftIcon style={{ color: globalVariables.black }} />
-      </Button>
-      <div style={{ fontWeight: "bold", fontSize: "24px" }}>
-        {page}/{totalPages}
-      </div>
-      <Button
-        onClick={() => {
-          setPageNumber(page + 1);
-        }}
-      >
-        <ArrowCircleRightIcon style={{ color: globalVariables.black }} />
-      </Button>
+    <div
+      className={classes.navBar}
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <Pagination
+        count={totalPages}
+        page={page}
+        onChange={(event, value) => setPageNumber(value)}
+        shape="rounded"
+        color="primary"
+        size="large"
+      />
     </div>
   );
 }

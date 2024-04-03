@@ -49,10 +49,8 @@ export function Home() {
       </div>
       <div>
         <ListNavBar
-          pageSize={pageSize}
           setPageNumber={setpage}
           page={page}
-          setPageSize={setPageSize}
           totalPages={Math.round(totalCount / pageSize)}
         />
       </div>
